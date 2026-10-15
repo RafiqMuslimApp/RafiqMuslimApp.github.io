@@ -6,173 +6,374 @@
 <title>رفيق المسلم — تحميل التطبيق</title>
 <meta name="description" content="الصفحة الرسمية لتحميل تطبيق رفيق المسلم">
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
 <style>
-*{box-sizing:border-box}
+:root{
+  --mint:#55e8ad;
+  --green:#20c789;
+  --forest:#176448;
+  --deep:#0b3023;
+  --night:#061a13;
+  --ink:#062117;
+  --paper:#f1f6ef;
+  --body:#3d5b4e;
+  --ease:cubic-bezier(.2,.8,.2,1);
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+
+/* ===== سكرول بحجم الخيط ===== */
+html{scrollbar-width:thin;scrollbar-color:var(--green) transparent}
+::-webkit-scrollbar{width:2px;height:2px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:linear-gradient(var(--mint),var(--green));border-radius:2px}
+
 body{
   margin:0;
   min-height:100vh;
-  font-family:Tahoma,Arial,sans-serif;
+  font-family:'IBM Plex Sans Arabic',Tahoma,Arial,sans-serif;
   color:#f5fff9;
-  background:
-    radial-gradient(circle at 50% 0%,#176448 0%,#0b3023 35%,#061a13 75%);
+  background:radial-gradient(circle at 50% 0%,#176448 0%,#0b3023 35%,#061a13 75%) fixed;
   display:flex;
   justify-content:center;
   align-items:center;
-  padding:25px;
+  padding:38px 20px 30px;
+  overflow-x:hidden;
 }
-.container{
-  width:100%;
-  max-width:560px;
-  text-align:center;
+button,a{font-family:inherit}
+
+/* خلفية متحركة هادئة */
+.glow{position:fixed;border-radius:50%;filter:blur(70px);pointer-events:none;z-index:0}
+.glow.a{width:340px;height:340px;background:#20c78933;top:8%;right:-90px;animation:drift 14s ease-in-out infinite alternate}
+.glow.b{width:300px;height:300px;background:#55e8ad22;bottom:4%;left:-80px;animation:drift 17s ease-in-out infinite alternate-reverse}
+@keyframes drift{to{transform:translate(-40px,50px) scale(1.15)}}
+
+.container{position:relative;z-index:1;width:100%;max-width:540px;text-align:center}
+
+/* ===== الورقة ===== */
+.paper{
+  position:relative;
+  padding:44px 26px 30px;
+  color:var(--ink);
+  border-radius:6px;
+  background-color:var(--paper);
+  background-image:
+    linear-gradient(to bottom,transparent 33%,#0b302312 33.2%,transparent 34.6%),
+    linear-gradient(to bottom,transparent 66%,#0b302312 66.2%,transparent 67.6%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 .1 0 0 0 0 .3 0 0 0 0 .2 0 0 0 .09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  box-shadow:0 1px 0 #fff inset,0 2px 4px #0003,0 24px 60px #0007,0 50px 90px #0004;
+  transform-origin:50% 0;
+  animation:paperIn 1.1s var(--ease) both;
 }
+@keyframes paperIn{
+  0%{opacity:0;transform:translateY(80px) rotate(-4deg) scale(.95)}
+  65%{opacity:1;transform:translateY(-6px) rotate(.6deg) scale(1)}
+  100%{opacity:1;transform:none}
+}
+/* شريط لاصق */
+.tape{
+  position:absolute;top:-15px;left:50%;
+  width:118px;height:32px;
+  transform:translateX(-50%) rotate(-2.5deg);
+  background:linear-gradient(135deg,#55e8ad99,#20c78999);
+  backdrop-filter:blur(2px);
+  box-shadow:0 2px 6px #0003;
+  clip-path:polygon(0 0,3% 25%,0 50%,3% 75%,0 100%,100% 100%,97% 75%,100% 50%,97% 25%,100% 0);
+  animation:tapeIn .6s .9s var(--ease) both;
+}
+@keyframes tapeIn{from{opacity:0;transform:translateX(-50%) rotate(-2.5deg) translateY(-18px) scale(1.2)}}
+
+/* الدخول المتتابع */
+.rv{opacity:0;animation:rise .8s var(--ease) forwards;animation-delay:calc(var(--i)*.1s + .7s)}
+@keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+
+/* ===== اللوجو ===== */
+.logo-wrap{position:relative;width:104px;height:104px;margin:0 auto}
+.logo-wrap::before,.logo-wrap::after{
+  content:"";position:absolute;inset:-6px;border-radius:34px;
+  border:2px solid var(--green);opacity:0;
+  animation:ring 3.2s ease-out infinite;
+}
+.logo-wrap::after{animation-delay:1.6s}
+@keyframes ring{0%{opacity:.55;transform:scale(.95)}100%{opacity:0;transform:scale(1.35)}}
 .logo{
-  width:92px;
-  height:92px;
-  margin:auto;
+  position:relative;z-index:1;
+  width:100%;height:100%;object-fit:cover;display:block;
   border-radius:28px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:linear-gradient(145deg,#32d99b,#08704e);
-  box-shadow:0 18px 45px #0006;
-  font-size:48px;
+  box-shadow:0 14px 34px #08704e66,0 0 0 4px #fff;
+  animation:float 5s ease-in-out infinite;
 }
+@keyframes float{50%{transform:translateY(-7px)}}
+
 .badge{
-  display:inline-block;
-  margin-top:20px;
-  padding:7px 14px;
-  border:1px solid #ffffff22;
-  border-radius:50px;
-  background:#ffffff0d;
-  color:#d8eee5;
-  font-size:13px;
+  display:inline-block;margin-top:24px;padding:7px 16px;
+  border:1px solid #20c78955;border-radius:50px;
+  background:#20c7891a;color:#0d6b49;
+  font-size:13px;font-weight:600;
 }
 h1{
-  font-size:45px;
-  margin:12px 0 8px;
+  font-size:46px;font-weight:700;line-height:1.3;margin:14px 0 6px;
+  background:linear-gradient(120deg,#0b3023 20%,#176448 50%,#0b3023 80%);
+  background-size:220% 100%;
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  animation:rise .8s var(--ease) forwards,sheen 6s 2s ease-in-out infinite;
+  animation-delay:.8s,0s;
 }
+@keyframes sheen{50%{background-position:-120% 0}}
 .subtitle{
-  color:#b8ccc3;
-  line-height:1.9;
-  font-size:15px;
+  color:var(--body);line-height:2;font-size:15.5px;font-weight:400;
+  max-width:400px;margin:0 auto;
 }
-.card{
-  margin-top:25px;
-  padding:24px;
-  border:1px solid #ffffff20;
-  border-radius:27px;
-  background:#ffffff0d;
-  box-shadow:0 20px 60px #0004;
-  backdrop-filter:blur(16px);
-}
+
+/* ===== التحميل ===== */
 .version{
-  color:#d9eee6;
-  font-size:14px;
-  margin-bottom:16px;
+  margin:26px 0 14px;color:#2e5446;font-size:14px;font-weight:500;
+  display:flex;align-items:center;justify-content:center;gap:9px;
 }
+.dot{width:8px;height:8px;border-radius:50%;background:var(--green);position:relative}
+.dot::after{content:"";position:absolute;inset:0;border-radius:50%;background:var(--green);animation:ping 1.8s ease-out infinite}
+@keyframes ping{to{transform:scale(3.2);opacity:0}}
+
 .download{
-  display:block;
-  padding:16px;
-  border-radius:17px;
-  background:linear-gradient(135deg,#55e8ad,#20c789);
-  color:#062117;
-  text-decoration:none;
-  font-size:18px;
-  font-weight:bold;
+  position:relative;overflow:hidden;
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  padding:17px;border-radius:17px;
+  background:linear-gradient(135deg,var(--mint),var(--green));
+  color:var(--ink);text-decoration:none;
+  font-size:18px;font-weight:700;
+  box-shadow:0 12px 28px #20c78955,0 2px 0 #ffffff66 inset;
+  transition:transform .3s var(--ease),box-shadow .3s;
 }
+.download::before{
+  content:"";position:absolute;top:0;bottom:0;width:60px;left:-90px;
+  background:linear-gradient(100deg,transparent,#ffffffaa,transparent);
+  transform:skewX(-20deg);animation:shine 3.6s 1.8s ease-in-out infinite;
+}
+@keyframes shine{0%{left:-90px}45%,100%{left:120%}}
+.download svg{width:22px;height:22px;animation:bob 1.8s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(3px)}}
+.download:hover{transform:translateY(-3px);box-shadow:0 18px 36px #20c78977,0 2px 0 #ffffff66 inset}
+.download:active{transform:translateY(0) scale(.98)}
+.download:focus-visible,.env:focus-visible,.telegram:focus-visible{outline:3px solid var(--forest);outline-offset:4px}
+
 .info{
-  display:flex;
-  justify-content:center;
-  gap:20px;
-  flex-wrap:wrap;
-  margin-top:15px;
-  color:#a9c3b8;
-  font-size:13px;
+  display:flex;justify-content:center;gap:22px;flex-wrap:wrap;
+  margin-top:16px;color:#4a6c5e;font-size:13px;
 }
-.features{
-  text-align:right;
-  border-top:1px solid #ffffff18;
-  margin-top:22px;
-  padding-top:18px;
+.info span{display:inline-flex;align-items:center;gap:6px}
+.info svg{width:16px;height:16px;stroke:var(--forest)}
+
+/* ===== الظرف ===== */
+.sep{
+  height:1px;margin:30px 0 26px;
+  background:linear-gradient(90deg,transparent,#17644866,transparent);
 }
-.features h2{
-  font-size:17px;
+.env-wrap{transition:margin-top 1s var(--ease)}
+.env{
+  position:relative;height:190px;perspective:900px;cursor:pointer;
+  border-radius:8px;user-select:none;outline:none;
+  transition:transform .4s var(--ease);
 }
-.features li{
-  color:#c5d9d1;
-  line-height:2;
+.env:hover{transform:translateY(-4px)}
+.env.open:hover{transform:none}
+.env .back{
+  position:absolute;inset:0;border-radius:8px;
+  background:linear-gradient(160deg,#0b3023,#0e4631);
+  box-shadow:0 18px 34px #0b302355;
 }
+.env .front{position:absolute;inset:0;z-index:3;pointer-events:none}
+.env .front i{position:absolute;inset:0;display:block}
+.env .front .l{background:linear-gradient(120deg,#0f4d37,#0c3b2b);clip-path:polygon(0 0,50% 55%,0 100%)}
+.env .front .r{background:linear-gradient(240deg,#14644a,#0e4a35);clip-path:polygon(100% 0,50% 55%,100% 100%)}
+.env .front .b{background:linear-gradient(0deg,#176448,#11553d);clip-path:polygon(0 100%,50% 52%,100% 100%);border-radius:0 0 8px 8px}
+
+.flap{
+  position:absolute;top:0;left:0;width:100%;height:58%;
+  transform-origin:top center;transform-style:preserve-3d;
+  transition:transform .65s var(--ease),z-index 0s .3s;
+  z-index:4;
+}
+.flap i{
+  position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;
+  clip-path:polygon(0 0,100% 0,50% 100%);
+}
+.flap .f1{background:linear-gradient(180deg,#1b7a58,#13603f)}
+.flap .f2{background:linear-gradient(0deg,#0a2a1f,#0d3a2a);transform:rotateX(180deg)}
+.env.open .flap{transform:rotateX(180deg);z-index:1}
+
+.seal{
+  position:absolute;left:50%;top:58%;z-index:5;
+  width:46px;height:46px;margin:-23px 0 0 -23px;border-radius:50%;
+  display:grid;place-items:center;
+  background:radial-gradient(circle at 35% 30%,#8ff5cb,var(--green) 60%,#0f8f63);
+  box-shadow:0 6px 14px #0006,0 0 0 4px #ffffff22 inset;
+  animation:pulse 2.2s ease-in-out infinite;
+  transition:opacity .25s,transform .35s var(--ease);
+}
+.seal svg{width:20px;height:20px;stroke:var(--ink)}
+@keyframes pulse{50%{box-shadow:0 6px 14px #0006,0 0 0 10px #55e8ad33}}
+.env.open .seal{opacity:0;transform:scale(0) rotate(90deg);animation:none}
+
+.letter{
+  position:absolute;left:5%;right:5%;bottom:14px;height:130px;z-index:2;
+  overflow:hidden;border-radius:10px 10px 4px 4px;
+  background:
+    repeating-linear-gradient(#0000 0 35px,#20c78924 35px 36px),
+    #fdfffb;
+  box-shadow:0 -4px 20px #0b302322;
+  padding:24px 20px 176px;text-align:right;
+  transition:height 1s var(--ease);
+}
+.env.open .letter{transition-delay:.5s}
+.letter h2{margin:0 0 6px;font-size:19px;font-weight:700;color:var(--deep)}
+.letter ul{list-style:none;margin:0;padding:0}
+.letter li{
+  display:flex;align-items:center;gap:12px;
+  min-height:36px;padding:0;
+  color:#2d4d40;font-size:15px;font-weight:500;line-height:1.7;
+  opacity:0;transform:translateX(18px);
+}
+.letter li svg{flex:none;width:22px;height:22px;padding:4px;border-radius:50%;background:var(--green);stroke:var(--ink)}
+.env.open .letter li{animation:slideIn .6s var(--ease) forwards;animation-delay:calc(var(--k)*.12s + 1.05s)}
+@keyframes slideIn{to{opacity:1;transform:none}}
+
+.hint{
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  margin-top:16px;font-size:13.5px;font-weight:500;color:#2e5446;
+}
+.hint svg{width:16px;height:16px;stroke:var(--forest);animation:bob 1.6s ease-in-out infinite}
+.env-wrap.open .hint svg{animation:none;transform:rotate(180deg)}
+
+/* ===== تيليجرام + الفوتر ===== */
 .telegram{
-  display:inline-block;
-  margin-top:22px;
-  color:#bdebd9;
-  text-decoration:none;
-  font-size:14px;
+  display:inline-flex;align-items:center;gap:8px;margin-top:24px;
+  padding:9px 18px;border-radius:50px;
+  border:1px solid #17644855;color:#0d6b49;
+  text-decoration:none;font-size:14px;font-weight:600;
+  transition:background .3s,color .3s,transform .3s var(--ease);
 }
-.footer{
-  margin-top:25px;
-  color:#76958a;
-  font-size:12px;
+.telegram svg{width:17px;height:17px}
+.telegram:hover{background:var(--forest);color:#fff;transform:translateY(-2px)}
+.footer{margin-top:26px;color:#76958a;font-size:12px}
+
+@media (max-width:420px){
+  h1{font-size:38px}
+  .paper{padding:42px 18px 26px}
+  .letter{padding-inline:16px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-delay:0s!important;animation-iteration-count:1!important;transition-duration:.01ms!important;transition-delay:0s!important}
 }
 </style>
 </head>
-
 <body>
+<div class="glow a"></div>
+<div class="glow b"></div>
 
 <div class="container">
+  <main class="paper">
+    <div class="tape"></div>
 
-  <div class="logo">☪</div>
-
-  <div class="badge">التطبيق الإسلامي الشامل</div>
-
-  <h1>رفيق المسلم</h1>
-
-  <div class="subtitle">
-    رفيقك اليومي للعبادة والذكر، بواجهة بسيطة وسريعة
-    تساعدك على متابعة عبادتك أينما كنت.
-  </div>
-
-  <div class="card">
-
-    <div class="version">
-      أحدث إصدار مستقر · 1.2.0
+    <div class="rv" style="--i:0">
+      <div class="logo-wrap">
+        <img class="logo" src="https://cdn.phototourl.com/member/2026-10-15-7bb00959-9663-4759-aacc-2b25575a29ff.png" alt="رفيق المسلم" width="104" height="104">
+      </div>
     </div>
 
-    <a class="download"
-       href="https://github.com/RafiqMuslimApp/RafiqMuslim/releases/download/v1.2.0/RafiqMuslim-v1.2.0-Full-Test.apk">
-       تحميل التطبيق
+    <div class="rv" style="--i:1"><div class="badge">التطبيق الإسلامي الشامل</div></div>
+    <h1>رفيق المسلم</h1>
+    <div class="subtitle rv" style="--i:3">
+      رفيقك اليومي للعبادة والذكر، بواجهة بسيطة وسريعة
+      تساعدك على متابعة عبادتك أينما كنت.
+    </div>
+
+    <div class="rv" style="--i:4">
+      <div class="version"><span class="dot"></span>أحدث إصدار مستقر · 1.2.0</div>
+      <a class="download"
+         href="https://github.com/RafiqMuslimApp/RafiqMuslim/releases/download/v1.2.0/RafiqMuslim-v1.2.0-Full-Test.apk">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11m0 0l-5-5m5 5l5-5M5 20h14"/></svg>
+        تحميل التطبيق
+      </a>
+      <div class="info">
+        <span><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8zM14 3v5h5"/></svg>حجم APK: 9.4 MB</span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2" width="12" height="20" rx="3"/><path d="M11 18h2"/></svg>Android</span>
+      </div>
+    </div>
+
+    <div class="sep rv" style="--i:5"></div>
+
+    <div class="env-wrap rv" style="--i:6" id="wrap">
+      <div class="env" id="env" role="button" tabindex="0" aria-expanded="false" aria-label="افتح الظرف لعرض أبرز المميزات">
+        <div class="back"></div>
+
+        <div class="letter" id="letter">
+          <h2>أبرز المميزات</h2>
+          <ul>
+            <li style="--k:0"><svg viewBox="0 0 24 24" fill="none" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>أذان الشيخ ناصر القطامي</li>
+            <li style="--k:1"><svg viewBox="0 0 24 24" fill="none" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>أذان الفجر بصوت الشيخ مشاري راشد العفاسي</li>
+            <li style="--k:2"><svg viewBox="0 0 24 24" fill="none" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>واجهة محسّنة وتجربة استخدام بسيطة</li>
+            <li style="--k:3"><svg viewBox="0 0 24 24" fill="none" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>تحسينات في الأداء وإصلاحات للمشاكل</li>
+          </ul>
+        </div>
+
+        <div class="front"><i class="l"></i><i class="r"></i><i class="b"></i></div>
+        <div class="flap"><i class="f1"></i><i class="f2"></i></div>
+        <div class="seal"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5L18 18M18 6l-2.5 2.5M8.5 15.5L6 18"/></svg></div>
+      </div>
+      <div class="hint">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+        <span id="hintText">اضغط على الظرف لفتحه</span>
+      </div>
+    </div>
+
+    <a class="telegram rv" style="--i:7" href="https://t.me/Rafiq_Almusilm">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.4 4.1L2.9 11.2c-1.3.5-1.2 1.2-.2 1.5l4.7 1.5 1.8 5.6c.2.6.1.8.7.8.5 0 .7-.2 1-.5l2.3-2.2 4.8 3.5c.9.5 1.5.2 1.7-.8l3.1-14.7c.3-1.3-.5-1.9-1.4-1.5zM8.7 13.6l9.4-5.9c.4-.3.8-.1.5.2l-7.8 7-.3 3.2-1.8-4.5z"/></svg>
+      قناة رفيق المسلم على Telegram
     </a>
+  </main>
 
-    <div class="info">
-      <span>حجم APK: 9.4 MB</span>
-      <span>Android</span>
-    </div>
-
-    <div class="features">
-
-      <h2>أبرز المميزات</h2>
-
-      <ul>
-        <li>أذان الشيخ ناصر القطامي</li>
-        <li>أذان الفجر بصوت الشيخ مشاري راشد العفاسي</li>
-        <li>واجهة محسّنة وتجربة استخدام بسيطة</li>
-        <li>تحسينات في الأداء وإصلاحات للمشاكل</li>
-      </ul>
-
-    </div>
-
-  </div>
-
-  <a class="telegram"
-     href="https://t.me/Rafiq_Almusilm">
-     قناة رفيق المسلم على Telegram
-  </a>
-
-  <div class="footer">
-    © 2026 رفيق المسلم
-  </div>
-
+  <div class="footer rv" style="--i:8">© 2026 رفيق المسلم</div>
 </div>
 
+<script>
+(function(){
+  var env=document.getElementById('env'),
+      wrap=document.getElementById('wrap'),
+      letter=document.getElementById('letter'),
+      hint=document.getElementById('hintText'),
+      CLOSED=130, INNER=176;
+
+  function setOpen(open){
+    env.classList.toggle('open',open);
+    wrap.classList.toggle('open',open);
+    env.setAttribute('aria-expanded',open);
+    hint.textContent=open?'اضغط لإغلاق الظرف':'اضغط على الظرف لفتحه';
+    if(open){
+      var h=letter.scrollHeight;
+      letter.style.height=h+'px';
+      wrap.style.transitionDelay='.5s';
+      wrap.style.marginTop=Math.max(0,h-INNER)+10+'px';
+    }else{
+      letter.style.height='';
+      wrap.style.transitionDelay='0s';
+      wrap.style.marginTop='';
+    }
+  }
+  env.addEventListener('click',function(){setOpen(!env.classList.contains('open'))});
+  env.addEventListener('keydown',function(e){
+    if(e.key==='Enter'||e.key===' '){e.preventDefault();setOpen(!env.classList.contains('open'))}
+  });
+  window.addEventListener('resize',function(){
+    if(env.classList.contains('open')){
+      letter.style.height='auto';
+      var h=letter.scrollHeight;
+      letter.style.height=h+'px';
+      wrap.style.marginTop=Math.max(0,h-INNER)+10+'px';
+    }
+  });
+})();
+</script>
 </body>
-  </html>
+</html>
