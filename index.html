@@ -33,7 +33,7 @@
 <link rel="icon" href="https://cdn.phototourl.com/member/2026-10-16-2112eb79-0a1e-4aea-934c-e7adf371a94e.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <script type="application/ld+json">
 {
@@ -58,9 +58,9 @@
   "inLanguage": "ar",
   "description": "تطبيق إسلامي يساعد على متابعة العبادة اليومية والاستفادة من الأذان والأذكار.",
   "image": "https://cdn.phototourl.com/member/2026-10-16-2112eb79-0a1e-4aea-934c-e7adf371a94e.png",
-  "downloadUrl": "https://github.com/RafiqMuslimApp/RafiqMuslim/releases/download/v1.2.0/RafiqMuslim-v1.2.0-Full-Test.apk",
-  "installUrl": "https://github.com/RafiqMuslimApp/RafiqMuslim/releases/download/v1.2.0/RafiqMuslim-v1.2.0-Full-Test.apk",
-  "softwareVersion": "1.2.0"
+  "downloadUrl": "https://github.com/RafiqMuslimApp/RafiqMuslim/releases/download/v1.3.0/app-release.apk",
+  "installUrl": "https://github.com/RafiqMuslimApp/RafiqMuslim/releases/download/v1.3.0/app-release.apk",
+  "softwareVersion": "1.3.0"
 }
 </script>
 
@@ -78,114 +78,99 @@
   --ease:cubic-bezier(.2,.8,.2,1);
 }
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html{scrollbar-width:thin;scrollbar-color:var(--green) transparent}
+html{scrollbar-width:thin;scrollbar-color:var(--green) transparent;background:#061a13}
 ::-webkit-scrollbar{width:2px;height:2px}
 ::-webkit-scrollbar-track{background:transparent}
 ::-webkit-scrollbar-thumb{background:linear-gradient(var(--mint),var(--green));border-radius:2px}
 body{
   margin:0;min-height:100vh;font-family:'IBM Plex Sans Arabic',Tahoma,Arial,sans-serif;
   color:#f5fff9;
-  background:radial-gradient(circle at 50% 0%,#176448 0%,#0b3023 35%,#061a13 75%) fixed;
+  /* خلفية ثابتة بدون fixed (كانت تسبب لاج في السكرول) */
+  background:radial-gradient(circle at 50% 0%,#176448 0%,#0b3023 35%,#061a13 75%) #061a13;
   display:flex;justify-content:center;align-items:center;
   padding:38px 20px 30px;overflow-x:hidden
 }
 button,a{font-family:inherit}
-.glow{position:fixed;border-radius:50%;filter:blur(70px);pointer-events:none;z-index:0}
-.glow.a{width:340px;height:340px;background:#20c78933;top:8%;right:-90px;animation:drift 14s ease-in-out infinite alternate}
-.glow.b{width:300px;height:300px;background:#55e8ad22;bottom:4%;left:-80px;animation:drift 17s ease-in-out infinite alternate-reverse}
-@keyframes drift{to{transform:translate(-40px,50px) scale(1.15)}}
+
+/* التوهج: تدرجات شعاعية ثابتة بدل filter:blur المتحرك (أثقل عنصر في الصفحة) */
+.glow{position:fixed;border-radius:50%;pointer-events:none;z-index:0;transform:translateZ(0)}
+.glow.a{width:380px;height:380px;top:6%;right:-120px;background:radial-gradient(circle,#20c78933 0%,#20c78900 70%)}
+.glow.b{width:340px;height:340px;bottom:2%;left:-110px;background:radial-gradient(circle,#55e8ad22 0%,#55e8ad00 70%)}
+
 .container{position:relative;z-index:1;width:100%;max-width:540px;text-align:center}
 .paper{
   position:relative;padding:44px 26px 30px;color:var(--ink);border-radius:6px;
+  /* بدون صورة ضجيج SVG feTurbulence (ثقيلة جدًا على الموبايل) */
   background-color:var(--paper);
   background-image:
     linear-gradient(to bottom,transparent 33%,#0b302312 33.2%,transparent 34.6%),
-    linear-gradient(to bottom,transparent 66%,#0b302312 66.2%,transparent 67.6%),
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 .1 0 0 0 0 .3 0 0 0 0 .2 0 0 0 .09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  box-shadow:0 1px 0 #fff inset,0 2px 4px #0003,0 24px 60px #0007,0 50px 90px #0004;
-  transform-origin:50% 0;animation:paperIn 1.1s var(--ease) both
+    linear-gradient(to bottom,transparent 66%,#0b302312 66.2%,transparent 67.6%);
+  box-shadow:0 1px 0 #fff inset,0 20px 44px #0006;
+  transform-origin:50% 0;animation:paperIn .9s var(--ease) both
 }
 @keyframes paperIn{
-  0%{opacity:0;transform:translateY(80px) rotate(-4deg) scale(.95)}
-  65%{opacity:1;transform:translateY(-6px) rotate(.6deg) scale(1)}
+  0%{opacity:0;transform:translateY(60px) rotate(-3deg) scale(.96)}
   100%{opacity:1;transform:none}
 }
 .tape{
   position:absolute;top:-15px;left:50%;width:118px;height:32px;
   transform:translateX(-50%) rotate(-2.5deg);
-  background:linear-gradient(135deg,#55e8ad99,#20c78999);
-  backdrop-filter:blur(2px);box-shadow:0 2px 6px #0003;
+  background:linear-gradient(135deg,#55e8adcc,#20c789cc);
+  box-shadow:0 2px 6px #0003;
   clip-path:polygon(0 0,3% 25%,0 50%,3% 75%,0 100%,100% 100%,97% 75%,100% 50%,97% 25%,100% 0);
-  animation:tapeIn .6s .9s var(--ease) both
+  animation:tapeIn .5s .7s var(--ease) both
 }
 @keyframes tapeIn{from{opacity:0;transform:translateX(-50%) rotate(-2.5deg) translateY(-18px) scale(1.2)}}
-.rv{opacity:0;animation:rise .8s var(--ease) forwards;animation-delay:calc(var(--i)*.1s + .7s)}
-@keyframes rise{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+.rv{opacity:0;animation:rise .6s var(--ease) forwards;animation-delay:calc(var(--i)*.07s + .5s)}
+@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
 .logo-wrap{position:relative;width:104px;height:104px;margin:0 auto}
-.logo-wrap::before,.logo-wrap::after{
-  content:"";position:absolute;inset:-6px;border-radius:34px;border:2px solid var(--green);
-  opacity:0;animation:ring 3.2s ease-out infinite
-}
-.logo-wrap::after{animation-delay:1.6s}
-@keyframes ring{0%{opacity:.55;transform:scale(.95)}100%{opacity:0;transform:scale(1.35)}}
 .logo{
   position:relative;z-index:1;width:100%;height:100%;object-fit:cover;display:block;
-  border-radius:28px;box-shadow:0 14px 34px #08704e66,0 0 0 4px #fff;
-  animation:float 5s ease-in-out infinite
+  border-radius:28px;box-shadow:0 10px 24px #08704e55,0 0 0 4px #fff
 }
-@keyframes float{50%{transform:translateY(-7px)}}
 .badge{
   display:inline-block;margin-top:24px;padding:7px 16px;border:1px solid #20c78955;
   border-radius:50px;background:#20c7891a;color:#0d6b49;font-size:13px;font-weight:600
 }
 h1{
   font-size:46px;font-weight:700;line-height:1.3;margin:14px 0 6px;
-  background:linear-gradient(120deg,#0b3023 20%,#176448 50%,#0b3023 80%);
-  background-size:220% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;
-  animation:rise .8s var(--ease) forwards,sheen 6s 2s ease-in-out infinite;animation-delay:.8s,0s
+  color:var(--deep);
+  opacity:0;animation:rise .6s var(--ease) .6s forwards
 }
-@keyframes sheen{50%{background-position:-120% 0}}
 .subtitle{color:var(--body);line-height:2;font-size:15.5px;font-weight:400;max-width:400px;margin:0 auto}
 .version{
   margin:26px 0 14px;color:#2e5446;font-size:14px;font-weight:500;
   display:flex;align-items:center;justify-content:center;gap:9px
 }
 .dot{width:8px;height:8px;border-radius:50%;background:var(--green);position:relative}
-.dot::after{content:"";position:absolute;inset:0;border-radius:50%;background:var(--green);animation:ping 1.8s ease-out infinite}
-@keyframes ping{to{transform:scale(3.2);opacity:0}}
+.dot::after{content:"";position:absolute;inset:0;border-radius:50%;background:var(--green);animation:ping 2s ease-out infinite;will-change:transform,opacity}
+@keyframes ping{to{transform:scale(3);opacity:0}}
 .download{
   position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;gap:10px;
   padding:17px;border-radius:17px;background:linear-gradient(135deg,var(--mint),var(--green));
   color:var(--ink);text-decoration:none;font-size:18px;font-weight:700;
-  box-shadow:0 12px 28px #20c78955,0 2px 0 #ffffff66 inset;
-  transition:transform .3s var(--ease),box-shadow .3s
+  box-shadow:0 10px 22px #20c78944;
+  transition:transform .25s var(--ease)
 }
-.download::before{
-  content:"";position:absolute;top:0;bottom:0;width:60px;left:-90px;
-  background:linear-gradient(100deg,transparent,#ffffffaa,transparent);
-  transform:skewX(-20deg);animation:shine 3.6s 1.8s ease-in-out infinite
-}
-@keyframes shine{0%{left:-90px}45%,100%{left:120%}}
-.download svg{width:22px;height:22px;animation:bob 1.8s ease-in-out infinite}
-@keyframes bob{50%{transform:translateY(3px)}}
-.download:hover{transform:translateY(-3px);box-shadow:0 18px 36px #20c78977,0 2px 0 #ffffff66 inset}
-.download:active{transform:translateY(0) scale(.98)}
+.download svg{width:22px;height:22px}
+.download:hover{transform:translateY(-2px)}
+.download:active{transform:scale(.98)}
 .download:focus-visible,.env:focus-visible,.telegram:focus-visible{outline:3px solid var(--forest);outline-offset:4px}
 .info{display:flex;justify-content:center;gap:22px;flex-wrap:wrap;margin-top:16px;color:#4a6c5e;font-size:13px}
 .info span{display:inline-flex;align-items:center;gap:6px}
 .info svg{width:16px;height:16px;stroke:var(--forest)}
 .sep{height:1px;margin:30px 0 26px;background:linear-gradient(90deg,transparent,#17644866,transparent)}
-.env-wrap{transition:margin-top 1s var(--ease)}
-.env{position:relative;height:190px;perspective:900px;cursor:pointer;border-radius:8px;user-select:none;outline:none;transition:transform .4s var(--ease)}
-.env:hover{transform:translateY(-4px)}
+.env-wrap{transition:margin-top .7s var(--ease)}
+.env{position:relative;height:190px;perspective:900px;cursor:pointer;border-radius:8px;user-select:none;outline:none;transition:transform .3s var(--ease)}
+.env:hover{transform:translateY(-3px)}
 .env.open:hover{transform:none}
-.env .back{position:absolute;inset:0;border-radius:8px;background:linear-gradient(160deg,#0b3023,#0e4631);box-shadow:0 18px 34px #0b302355}
+.env .back{position:absolute;inset:0;border-radius:8px;background:linear-gradient(160deg,#0b3023,#0e4631);box-shadow:0 12px 24px #0b302344}
 .env .front{position:absolute;inset:0;z-index:3;pointer-events:none}
 .env .front i{position:absolute;inset:0;display:block}
 .env .front .l{background:linear-gradient(120deg,#0f4d37,#0c3b2b);clip-path:polygon(0 0,50% 55%,0 100%)}
 .env .front .r{background:linear-gradient(240deg,#14644a,#0e4a35);clip-path:polygon(100% 0,50% 55%,100% 100%)}
 .env .front .b{background:linear-gradient(0deg,#176448,#11553d);clip-path:polygon(0 100%,50% 52%,100% 100%);border-radius:0 0 8px 8px}
-.flap{position:absolute;top:0;left:0;width:100%;height:58%;transform-origin:top center;transform-style:preserve-3d;transition:transform .65s var(--ease),z-index 0s .3s;z-index:4}
+.flap{position:absolute;top:0;left:0;width:100%;height:58%;transform-origin:top center;transform-style:preserve-3d;transition:transform .55s var(--ease),z-index 0s .25s;z-index:4;will-change:transform}
 .flap i{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;clip-path:polygon(0 0,100% 0,50% 100%)}
 .flap .f1{background:linear-gradient(180deg,#1b7a58,#13603f)}
 .flap .f2{background:linear-gradient(0deg,#0a2a1f,#0d3a2a);transform:rotateX(180deg)}
@@ -193,32 +178,37 @@ h1{
 .seal{
   position:absolute;left:50%;top:58%;z-index:5;width:46px;height:46px;margin:-23px 0 0 -23px;border-radius:50%;
   display:grid;place-items:center;background:radial-gradient(circle at 35% 30%,#8ff5cb,var(--green) 60%,#0f8f63);
-  box-shadow:0 6px 14px #0006,0 0 0 4px #ffffff22 inset;animation:pulse 2.2s ease-in-out infinite;
-  transition:opacity .25s,transform .35s var(--ease)
+  box-shadow:0 5px 10px #0006;animation:pulse 2.4s ease-in-out infinite;
+  transition:opacity .2s,transform .3s var(--ease);will-change:transform
 }
 .seal svg{width:20px;height:20px;stroke:var(--ink)}
-@keyframes pulse{50%{box-shadow:0 6px 14px #0006,0 0 0 10px #55e8ad33}}
+/* نبض بالـ transform بدل box-shadow (أخف على الـ GPU) */
+@keyframes pulse{50%{transform:scale(1.1)}}
 .env.open .seal{opacity:0;transform:scale(0) rotate(90deg);animation:none}
 .letter{
   position:absolute;left:5%;right:5%;bottom:14px;height:130px;z-index:2;overflow:hidden;border-radius:10px 10px 4px 4px;
   background:repeating-linear-gradient(#0000 0 35px,#20c78924 35px 36px),#fdfffb;
-  box-shadow:0 -4px 20px #0b302322;padding:24px 20px 176px;text-align:right;
-  transition:height 1s var(--ease)
+  box-shadow:0 -4px 14px #0b302322;padding:24px 20px 176px;text-align:right;
+  transition:height .8s var(--ease)
 }
-.env.open .letter{transition-delay:.5s}
+.env.open .letter{transition-delay:.35s}
 .letter h2{margin:0 0 6px;font-size:19px;font-weight:700;color:var(--deep)}
 .letter ul{list-style:none;margin:0;padding:0}
-.letter li{display:flex;align-items:center;gap:12px;min-height:36px;padding:0;color:#2d4d40;font-size:15px;font-weight:500;line-height:1.7;opacity:0;transform:translateX(18px)}
-.letter li svg{flex:none;width:22px;height:22px;padding:4px;border-radius:50%;background:var(--green);stroke:var(--ink)}
-.env.open .letter li{animation:slideIn .6s var(--ease) forwards;animation-delay:calc(var(--k)*.12s + 1.05s)}
+.letter li{display:flex;align-items:flex-start;gap:12px;min-height:36px;padding:5px 0;color:#2d4d40;font-size:14.5px;font-weight:500;line-height:1.8;opacity:0;transform:translateX(14px)}
+.letter li svg{flex:none;width:22px;height:22px;margin-top:4px;padding:4px;border-radius:50%;background:var(--green);stroke:var(--ink)}
+.letter li b{color:var(--deep);font-weight:700}
+.env.open .letter li{animation:slideIn .45s var(--ease) forwards;animation-delay:calc(var(--k)*.05s + .75s)}
 @keyframes slideIn{to{opacity:1;transform:none}}
+.letter .tagline{margin:10px 0 0;padding-top:8px;border-top:1px dashed #17644855;color:var(--forest);font-size:14px;font-weight:600;line-height:1.9;opacity:0}
+.env.open .letter .tagline{animation:slideIn .45s var(--ease) forwards;animation-delay:1.45s}
 .hint{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:16px;font-size:13.5px;font-weight:500;color:#2e5446}
-.hint svg{width:16px;height:16px;stroke:var(--forest);animation:bob 1.6s ease-in-out infinite}
+.hint svg{width:16px;height:16px;stroke:var(--forest);animation:bob 1.8s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(3px)}}
 .env-wrap.open .hint svg{animation:none;transform:rotate(180deg)}
 .telegram{
   display:inline-flex;align-items:center;gap:8px;margin-top:24px;padding:9px 18px;border-radius:50px;
   border:1px solid #17644855;color:#0d6b49;text-decoration:none;font-size:14px;font-weight:600;
-  transition:background .3s,color .3s,transform .3s var(--ease)
+  transition:background .25s,color .25s,transform .25s var(--ease)
 }
 .telegram svg{width:17px;height:17px}
 .telegram:hover{background:var(--forest);color:#fff;transform:translateY(-2px)}
@@ -227,7 +217,7 @@ h1{
 /* محتوى نصي يساعد الزائر ومحركات البحث */
 .seo-content{
   margin-top:28px;padding:20px 18px;text-align:right;
-  background:#ffffff80;border:1px solid #17644818;border-radius:14px;
+  background:#ffffff99;border:1px solid #17644818;border-radius:14px;
   color:var(--body);line-height:1.95
 }
 .seo-content h2{font-size:20px;color:var(--deep);margin:0 0 10px}
@@ -261,7 +251,7 @@ h1{
              src="https://cdn.phototourl.com/member/2026-10-16-2112eb79-0a1e-4aea-934c-e7adf371a94e.png"
              alt="أيقونة تطبيق رفيق المسلم"
              width="104" height="104"
-             fetchpriority="high">
+             fetchpriority="high" decoding="async">
       </div>
     </div>
 
@@ -279,11 +269,11 @@ h1{
     <div class="rv" style="--i:4">
       <div class="version">
         <span class="dot"></span>
-        أحدث إصدار مستقر · 1.2.0
+        أحدث إصدار · 1.3.0
       </div>
 
       <a class="download"
-         href="https://github.com/RafiqMuslimApp/RafiqMuslim/releases/download/v1.2.0/RafiqMuslim-v1.2.0-Full-Test.apk"
+         href="https://github.com/RafiqMuslimApp/RafiqMuslim/releases/download/v1.3.0/app-release.apk"
          aria-label="تحميل تطبيق رفيق المسلم للأندرويد APK">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <path d="M12 4v11m0 0l-5-5m5 5l5-5M5 20h14"/>
@@ -296,7 +286,7 @@ h1{
           <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8zM14 3v5h5"/>
           </svg>
-          حجم APK: 9.4 MB
+          ملف APK
         </span>
         <span>
           <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -316,25 +306,58 @@ h1{
         <div class="back"></div>
 
         <div class="letter" id="letter">
-          <h2>أبرز مميزات تطبيق رفيق المسلم</h2>
+          <h2>مميزات تطبيق رفيق المسلم</h2>
           <ul>
             <li style="--k:0">
               <svg viewBox="0 0 24 24" fill="none" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
-              الأذان بصوت الشيخ ناصر القطامي
+              <span><b>مواقيت الصلاة:</b> متابعة مواقيت الصلوات اليومية بسهولة.</span>
             </li>
             <li style="--k:1">
               <svg viewBox="0 0 24 24" fill="none" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
-              أذان الفجر بصوت الشيخ مشاري راشد العفاسي
+              <span><b>الأذان:</b> الاستماع إلى الأذان بأصوات مميزة، مع أذان الفجر بصوت الشيخ مشاري راشد العفاسي.</span>
             </li>
             <li style="--k:2">
               <svg viewBox="0 0 24 24" fill="none" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
-              واجهة محسّنة وتجربة استخدام بسيطة
+              <span><b>المساجد القريبة:</b> اكتشاف المساجد القريبة منك على الخريطة باستخدام الموقع الجغرافي والإنترنت.</span>
             </li>
             <li style="--k:3">
               <svg viewBox="0 0 24 24" fill="none" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
-              تحسينات في الأداء وإصلاحات للمشاكل
+              <span><b>الأذكار اليومية:</b> أذكار الصباح والمساء وأذكار متنوعة للمحافظة على وردك اليومي.</span>
+            </li>
+            <li style="--k:4">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
+              <span><b>الأدعية:</b> أدعية الأنبياء، والأدعية القرآنية، والأدعية الثابتة من السنة النبوية.</span>
+            </li>
+            <li style="--k:5">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
+              <span><b>القرآن الكريم:</b> قراءة القرآن الكريم مع خيارات متعددة للخطوط.</span>
+            </li>
+            <li style="--k:6">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
+              <span><b>الاستماع للقرآن:</b> الاستماع إلى تلاوات القرآن الكريم عبر الإنترنت.</span>
+            </li>
+            <li style="--k:7">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
+              <span><b>الإذاعة الإسلامية:</b> الاستماع إلى البث الإذاعي الإسلامي عبر الإنترنت.</span>
+            </li>
+            <li style="--k:8">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
+              <span><b>التلفزيون الإسلامي:</b> مشاهدة القنوات الإسلامية عبر الإنترنت.</span>
+            </li>
+            <li style="--k:9">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
+              <span><b>واجهة إسلامية أنيقة:</b> تصميم زجاجي عصري بألوان خضراء ولمسات ذهبية.</span>
+            </li>
+            <li style="--k:10">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
+              <span><b>التحديثات التلقائية:</b> التحقق من توفر تحديثات جديدة للتطبيق.</span>
+            </li>
+            <li style="--k:11">
+              <svg viewBox="0 0 24 24" fill="none" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
+              <span><b>تحسينات عامة:</b> تحسين تجربة الاستخدام وأداء التطبيق.</span>
             </li>
           </ul>
+          <p class="tagline">رفيق المسلم — رفيقك في يومك، ووسيلتك للمحافظة على عباداتك.</p>
         </div>
 
         <div class="front">
@@ -362,16 +385,17 @@ h1{
         تطبيق رفيق المسلم بصيغة APK لأجهزة Android.
       </p>
 
-      <h3>الأذان ومتابعة الصلاة</h3>
+      <h3>الأذان ومواقيت الصلاة</h3>
       <p>
-        يضم التطبيق ميزة الأذان، مع أذان الشيخ ناصر القطامي للصلوات،
-        وأذان الفجر بصوت الشيخ مشاري راشد العفاسي، وفق إعدادات التطبيق.
+        يضم التطبيق مواقيت الصلاة والأذان بأصوات مميزة، مع أذان الفجر
+        بصوت الشيخ مشاري راشد العفاسي، إضافة إلى اكتشاف المساجد القريبة منك.
       </p>
 
-      <h3>الأذكار الإسلامية</h3>
+      <h3>الأذكار والأدعية والقرآن</h3>
       <p>
-        يساعدك رفيق المسلم على الوصول إلى الأذكار ضمن تجربة مخصصة
-        للاستخدام اليومي، مع واجهة واضحة وسهلة الاستخدام.
+        يساعدك رفيق المسلم على الوصول إلى أذكار الصباح والمساء والأدعية
+        وقراءة القرآن الكريم والاستماع إليه، مع الإذاعة والتلفزيون الإسلامي
+        عبر الإنترنت، ضمن واجهة واضحة وسهلة الاستخدام.
       </p>
 
       <h3>طريقة تحميل رفيق المسلم</h3>
@@ -408,7 +432,14 @@ h1{
       wrap=document.getElementById('wrap'),
       letter=document.getElementById('letter'),
       hint=document.getElementById('hintText'),
-      INNER=176;
+      INNER=176, rafId=0;
+
+  function fit(){
+    letter.style.height='auto';
+    var h=letter.scrollHeight;
+    letter.style.height=h+'px';
+    wrap.style.marginTop=Math.max(0,h-INNER)+10+'px';
+  }
 
   function setOpen(open){
     env.classList.toggle('open',open);
@@ -417,11 +448,8 @@ h1{
     hint.textContent=open?'اضغط لإغلاق الظرف':'اضغط على الظرف لفتحه';
 
     if(open){
-      letter.style.height='auto';
-      var h=letter.scrollHeight;
-      letter.style.height=h+'px';
-      wrap.style.transitionDelay='.5s';
-      wrap.style.marginTop=Math.max(0,h-INNER)+10+'px';
+      wrap.style.transitionDelay='.35s';
+      fit();
     }else{
       letter.style.height='';
       wrap.style.transitionDelay='0s';
@@ -440,15 +468,13 @@ h1{
     }
   });
 
+  /* throttle للـ resize عشان ما يتنفذش مئات المرات */
   window.addEventListener('resize',function(){
-    if(env.classList.contains('open')){
-      letter.style.height='auto';
-      var h=letter.scrollHeight;
-      letter.style.height=h+'px';
-      wrap.style.marginTop=Math.max(0,h-INNER)+10+'px';
-    }
-  });
+    if(!env.classList.contains('open')) return;
+    cancelAnimationFrame(rafId);
+    rafId=requestAnimationFrame(fit);
+  },{passive:true});
 })();
 </script>
 </body>
-  </html>
+</html>
