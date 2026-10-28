@@ -58,9 +58,16 @@
   "inLanguage": "ar",
   "description": "تطبيق إسلامي يساعد على متابعة العبادة اليومية والاستفادة من الأذان والأذكار.",
   "image": "https://cdn.phototourl.com/member/2026-10-16-2112eb79-0a1e-4aea-934c-e7adf371a94e.png",
-  "downloadUrl": "https://github.com/RafiqMuslimApp/RafiqMuslim/releases/download/v1.3.0/app-release.apk",
-  "installUrl": "https://github.com/RafiqMuslimApp/RafiqMuslim/releases/download/v1.3.0/app-release.apk",
-  "softwareVersion": "1.3.0"
+  "screenshot": [
+    "https://cdn.phototourl.com/member/2026-10-27-95aa5aae-d386-46cd-9ea0-efab6c1efaae.png",
+    "https://cdn.phototourl.com/member/2026-10-27-51fb27be-c413-41a2-8792-6e259a7e2057.png",
+    "https://cdn.phototourl.com/member/2026-10-27-44d2bbca-cb80-4033-9f10-8f8aab97a3ce.png",
+    "https://i.postimg.cc/pVgCxb5g/file-0000000051448211886f87c3cc2681fd.png",
+    "https://i.postimg.cc/6Q5LzBFG/Picsart-26-10-25-22-56-38-929.jpg"
+  ],
+  "downloadUrl": "https://github.com/RafiqMuslimApp/RafiqMuslim/releases/download/v1.4.0/RafiqMuslim-v1.4.0.apk",
+  "installUrl": "https://github.com/RafiqMuslimApp/RafiqMuslim/releases/download/v1.4.0/RafiqMuslim-v1.4.0.apk",
+  "softwareVersion": "1.4.0"
 }
 </script>
 
@@ -78,29 +85,27 @@
   --ease:cubic-bezier(.2,.8,.2,1);
 }
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html{scrollbar-width:thin;scrollbar-color:var(--green) transparent;background:#061a13}
+html{scrollbar-width:thin;scrollbar-color:var(--green) transparent;background:#061a13;scroll-behavior:smooth}
 ::-webkit-scrollbar{width:2px;height:2px}
 ::-webkit-scrollbar-track{background:transparent}
 ::-webkit-scrollbar-thumb{background:linear-gradient(var(--mint),var(--green));border-radius:2px}
 body{
   margin:0;min-height:100vh;font-family:'IBM Plex Sans Arabic',Tahoma,Arial,sans-serif;
   color:#f5fff9;
-  /* خلفية ثابتة بدون fixed (كانت تسبب لاج في السكرول) */
   background:radial-gradient(circle at 50% 0%,#176448 0%,#0b3023 35%,#061a13 75%) #061a13;
   display:flex;justify-content:center;align-items:center;
   padding:38px 20px 30px;overflow-x:hidden
 }
 button,a{font-family:inherit}
 
-/* التوهج: تدرجات شعاعية ثابتة بدل filter:blur المتحرك (أثقل عنصر في الصفحة) */
 .glow{position:fixed;border-radius:50%;pointer-events:none;z-index:0;transform:translateZ(0)}
 .glow.a{width:380px;height:380px;top:6%;right:-120px;background:radial-gradient(circle,#20c78933 0%,#20c78900 70%)}
 .glow.b{width:340px;height:340px;bottom:2%;left:-110px;background:radial-gradient(circle,#55e8ad22 0%,#55e8ad00 70%)}
 
 .container{position:relative;z-index:1;width:100%;max-width:540px;text-align:center}
 .paper{
-  position:relative;padding:44px 26px 30px;color:var(--ink);border-radius:6px;
-  /* بدون صورة ضجيج SVG feTurbulence (ثقيلة جدًا على الموبايل) */
+  --pad:26px;
+  position:relative;padding:44px var(--pad) 30px;color:var(--ink);border-radius:6px;
   background-color:var(--paper);
   background-image:
     linear-gradient(to bottom,transparent 33%,#0b302312 33.2%,transparent 34.6%),
@@ -155,11 +160,88 @@ h1{
 .download svg{width:22px;height:22px}
 .download:hover{transform:translateY(-2px)}
 .download:active{transform:scale(.98)}
-.download:focus-visible,.env:focus-visible,.telegram:focus-visible{outline:3px solid var(--forest);outline-offset:4px}
+.download:focus-visible,.env:focus-visible,.telegram:focus-visible,.shot:focus-visible{outline:3px solid var(--forest);outline-offset:4px}
 .info{display:flex;justify-content:center;gap:22px;flex-wrap:wrap;margin-top:16px;color:#4a6c5e;font-size:13px}
 .info span{display:inline-flex;align-items:center;gap:6px}
 .info svg{width:16px;height:16px;stroke:var(--forest)}
-.sep{height:1px;margin:30px 0 26px;background:linear-gradient(90deg,transparent,#17644866,transparent)}
+
+/* ===== معرض لقطات الشاشة (شبه App Store) ===== */
+.shots{margin:28px calc(var(--pad) * -1) 0;text-align:right}
+.shots h2{margin:0 var(--pad) 12px;font-size:18px;font-weight:700;color:var(--deep)}
+.shots-row{
+  display:flex;gap:12px;overflow-x:auto;
+  padding:4px var(--pad) 16px;
+  scroll-snap-type:x mandatory;scroll-padding:0 var(--pad);
+  -webkit-overflow-scrolling:touch;scrollbar-width:none
+}
+.shots-row::-webkit-scrollbar{display:none}
+.shot{
+  flex:none;width:172px;aspect-ratio:9/19.5;padding:0;margin:0;
+  border:1px solid #17644833;border-radius:22px;overflow:hidden;
+  background:#dfeae3;box-shadow:0 8px 20px #0b302330;
+  scroll-snap-align:start;cursor:zoom-in;
+  transition:transform .25s var(--ease)
+}
+.shot:active{transform:scale(.97)}
+.shot img{width:100%;height:100%;object-fit:cover;display:block}
+
+/* عرض الصورة بحجم كبير */
+.lb{
+  position:fixed;inset:0;z-index:50;display:none;align-items:center;justify-content:center;
+  padding:24px;background:#061a13ee;cursor:zoom-out
+}
+.lb.show{display:flex}
+.lb img{max-width:100%;max-height:100%;border-radius:20px;box-shadow:0 20px 60px #000a}
+
+/* ===== مواقيت الصلاة ===== */
+.prayer{
+  position:relative;overflow:hidden;margin:0 0 28px;border-radius:22px;text-align:right;color:#f5fff9;
+  background:radial-gradient(circle at 90% 0%,#1f8a64 0%,#0e4631 48%,#0b3023 100%);
+  box-shadow:0 14px 30px #0b302355,0 1px 0 #ffffff22 inset
+}
+.prayer::after{
+  content:"";position:absolute;top:-70px;left:-70px;width:200px;height:200px;border-radius:50%;
+  border:28px solid #55e8ad12;pointer-events:none
+}
+.p-head{position:relative;z-index:1;display:flex;justify-content:space-between;align-items:flex-start;gap:10px;padding:18px 18px 6px}
+.p-loc{display:flex;align-items:center;gap:7px;font-size:17px;font-weight:700}
+.p-loc svg{flex:none;width:18px;height:18px;stroke:var(--mint)}
+.p-date{margin-top:5px;font-size:12.5px;line-height:1.7;color:#a9d8c5}
+.p-badge{flex:none;padding:5px 12px;border-radius:50px;background:#55e8ad22;border:1px solid #55e8ad44;color:var(--mint);font-size:12px;font-weight:600}
+.p-next{position:relative;z-index:1;display:flex;justify-content:space-between;align-items:flex-end;gap:12px;padding:12px 18px 16px}
+.p-next small{display:block;font-size:12px;color:#a9d8c5;margin-bottom:2px}
+.p-next strong{font-size:30px;font-weight:700;line-height:1.3}
+.p-count{text-align:left}
+.p-count b{display:block;direction:ltr;unicode-bidi:isolate;font-size:26px;font-weight:700;color:var(--mint);font-variant-numeric:tabular-nums;letter-spacing:1px}
+.p-grid{position:relative;z-index:1;display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:0 12px 14px}
+.p-item{padding:11px 4px 10px;border-radius:14px;text-align:center;background:#ffffff10;border:1px solid #ffffff14;transition:opacity .3s,background .3s}
+.p-item span{display:block;font-size:13px;color:#b9e3d2;margin-bottom:3px}
+.p-item b{display:inline-block;direction:ltr;unicode-bidi:isolate;font-size:18px;font-weight:700;font-variant-numeric:tabular-nums}
+.p-item em{font-style:normal;font-size:11px;margin-inline-start:4px;opacity:.8}
+.p-item.passed{opacity:.5}
+.p-item.active{
+  opacity:1;color:var(--ink);border-color:transparent;
+  background:linear-gradient(135deg,var(--mint),var(--green));box-shadow:0 6px 16px #20c78955
+}
+.p-item.active span{color:#0b4a33;font-weight:600}
+.p-note{position:relative;z-index:1;margin:0;padding:0 18px 12px;font-size:12px;line-height:1.8;color:#ffd98a}
+.p-note:empty{display:none}
+.p-foot{position:relative;z-index:1;display:flex;align-items:center;gap:8px;padding:10px 12px;background:#00000030}
+.p-select{
+  flex:1;min-width:0;padding:8px 10px;border-radius:10px;font-size:13px;color:#f5fff9;
+  background:#ffffff14;border:1px solid #ffffff26;font-family:inherit
+}
+.p-select option{color:var(--ink)}
+.p-btn{
+  flex:none;display:inline-flex;align-items:center;gap:6px;padding:8px 12px;border:0;border-radius:10px;
+  font-size:13px;font-weight:700;color:var(--ink);cursor:pointer;
+  background:linear-gradient(135deg,var(--mint),var(--green));transition:transform .2s var(--ease)
+}
+.p-btn svg{width:15px;height:15px;stroke:var(--ink)}
+.p-btn:active{transform:scale(.96)}
+.p-select:focus-visible,.p-btn:focus-visible{outline:2px solid var(--mint);outline-offset:2px}
+.prayer.loading .p-grid,.prayer.loading .p-next{opacity:.55}
+.sep{height:1px;margin:14px 0 26px;background:linear-gradient(90deg,transparent,#17644866,transparent)}
 .env-wrap{transition:margin-top .7s var(--ease)}
 .env{position:relative;height:190px;perspective:900px;cursor:pointer;border-radius:8px;user-select:none;outline:none;transition:transform .3s var(--ease)}
 .env:hover{transform:translateY(-3px)}
@@ -182,7 +264,6 @@ h1{
   transition:opacity .2s,transform .3s var(--ease);will-change:transform
 }
 .seal svg{width:20px;height:20px;stroke:var(--ink)}
-/* نبض بالـ transform بدل box-shadow (أخف على الـ GPU) */
 @keyframes pulse{50%{transform:scale(1.1)}}
 .env.open .seal{opacity:0;transform:scale(0) rotate(90deg);animation:none}
 .letter{
@@ -213,8 +294,9 @@ h1{
 .telegram svg{width:17px;height:17px}
 .telegram:hover{background:var(--forest);color:#fff;transform:translateY(-2px)}
 .footer{margin-top:26px;color:#76958a;font-size:12px}
+.footer a{color:#9fc3b3;text-decoration:underline;text-underline-offset:3px}
+.footer .links{display:flex;justify-content:center;gap:14px;margin-bottom:8px;font-size:13px}
 
-/* محتوى نصي يساعد الزائر ومحركات البحث */
 .seo-content{
   margin-top:28px;padding:20px 18px;text-align:right;
   background:#ffffff99;border:1px solid #17644818;border-radius:14px;
@@ -226,10 +308,14 @@ h1{
 .seo-content ul{padding-right:20px;margin:8px 0}
 .seo-content li{font-size:14px;margin:4px 0}
 .seo-content a{color:var(--forest);overflow-wrap:anywhere}
+.seo-content .updated{font-size:12.5px;color:#76958a}
+#privacy{scroll-margin-top:20px}
+
 @media (max-width:420px){
   h1{font-size:38px}
-  .paper{padding:42px 18px 26px}
+  .paper{--pad:18px;padding:42px var(--pad) 26px}
   .letter{padding-inline:16px}
+  .shot{width:156px}
 }
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.01ms!important;animation-delay:0s!important;animation-iteration-count:1!important;transition-duration:.01ms!important;transition-delay:0s!important}
@@ -269,11 +355,11 @@ h1{
     <div class="rv" style="--i:4">
       <div class="version">
         <span class="dot"></span>
-        أحدث إصدار · 1.3.0
+        أحدث إصدار · 1.4.0
       </div>
 
       <a class="download"
-         href="https://github.com/RafiqMuslimApp/RafiqMuslim/releases/download/v1.3.0/app-release.apk"
+         href="https://github.com/RafiqMuslimApp/RafiqMuslim/releases/download/v1.4.0/RafiqMuslim-v1.4.0.apk"
          aria-label="تحميل تطبيق رفيق المسلم للأندرويد APK">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <path d="M12 4v11m0 0l-5-5m5 5l5-5M5 20h14"/>
@@ -286,7 +372,7 @@ h1{
           <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8zM14 3v5h5"/>
           </svg>
-          حجم APK: 13.83 MB
+          حجم APK: 15.23 MB
         </span>
         <span>
           <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -298,7 +384,59 @@ h1{
       </div>
     </div>
 
+    <!-- لقطات الشاشة: الأولى على اليمين وتكمل لليسار -->
+    <section class="shots rv" style="--i:5" aria-labelledby="shots-title">
+      <h2 id="shots-title">لقطات من التطبيق</h2>
+      <div class="shots-row" id="shots">
+        <button class="shot" type="button" aria-label="عرض لقطة الشاشة 1">
+          <img src="https://cdn.phototourl.com/member/2026-10-27-95aa5aae-d386-46cd-9ea0-efab6c1efaae.png" alt="لقطة شاشة 1 من تطبيق رفيق المسلم" loading="lazy" decoding="async">
+        </button>
+        <button class="shot" type="button" aria-label="عرض لقطة الشاشة 2">
+          <img src="https://cdn.phototourl.com/member/2026-10-27-51fb27be-c413-41a2-8792-6e259a7e2057.png" alt="لقطة شاشة 2 من تطبيق رفيق المسلم" loading="lazy" decoding="async">
+        </button>
+        <button class="shot" type="button" aria-label="عرض لقطة الشاشة 3">
+          <img src="https://cdn.phototourl.com/member/2026-10-27-44d2bbca-cb80-4033-9f10-8f8aab97a3ce.png" alt="لقطة شاشة 3 من تطبيق رفيق المسلم" loading="lazy" decoding="async">
+        </button>
+        <button class="shot" type="button" aria-label="عرض لقطة الشاشة 4">
+          <img src="https://i.postimg.cc/pVgCxb5g/file-0000000051448211886f87c3cc2681fd.png" alt="لقطة شاشة 4 من تطبيق رفيق المسلم" loading="lazy" decoding="async">
+        </button>
+        <button class="shot" type="button" aria-label="عرض لقطة الشاشة 5">
+          <img src="https://i.postimg.cc/6Q5LzBFG/Picsart-26-10-25-22-56-38-929.jpg" alt="لقطة شاشة 5 من تطبيق رفيق المسلم" loading="lazy" decoding="async">
+        </button>
+      </div>
+    </section>
+
     <div class="sep rv" style="--i:5"></div>
+
+    <!-- مواقيت الصلاة -->
+    <section class="prayer rv loading" style="--i:6" id="prayer" aria-labelledby="prayer-title">
+      <div class="p-head">
+        <div>
+          <div class="p-loc">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
+            <span id="pCity">جارٍ تحديد موقعك…</span>
+          </div>
+          <div class="p-date" id="pDate">&nbsp;</div>
+        </div>
+        <h2 class="p-badge" id="prayer-title" style="margin:0">مواقيت الصلاة</h2>
+      </div>
+
+      <div class="p-next" aria-live="polite">
+        <div><small>الصلاة القادمة</small><strong id="pNextName">—</strong></div>
+        <div class="p-count"><small>متبقي</small><b id="pCount">--:--:--</b></div>
+      </div>
+
+      <div class="p-grid" id="pGrid"></div>
+      <p class="p-note" id="pNote"></p>
+
+      <div class="p-foot">
+        <select class="p-select" id="pSel" aria-label="اختيار المحافظة يدويًا"></select>
+        <button class="p-btn" id="pLoc" type="button">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg>
+          حدد موقعي
+        </button>
+      </div>
+    </section>
 
     <div class="env-wrap rv" style="--i:6" id="wrap">
       <div class="env" id="env" role="button" tabindex="0"
@@ -413,6 +551,63 @@ h1{
       </p>
     </section>
 
+    <!-- سياسة الخصوصية -->
+    <section class="seo-content" id="privacy" aria-labelledby="privacy-title">
+      <h2 id="privacy-title">سياسة الخصوصية</h2>
+      <p class="updated">آخر تحديث: 27 أكتوبر 2026</p>
+      <p>
+        خصوصيتك تهمنا. توضح هذه السياسة كيف يتعامل تطبيق «رفيق المسلم»
+        مع المعلومات عند استخدامك له.
+      </p>
+
+      <h3>1. البيانات التي نجمعها</h3>
+      <p>
+        لا يتطلب التطبيق إنشاء حساب، ولا نجمع اسمك أو بريدك الإلكتروني
+        أو رقم هاتفك أو أي بيانات شخصية تعريفية، ولا نبيع بياناتك أو نشاركها
+        مع أي جهة لأغراض إعلانية.
+      </p>
+
+      <h3>2. الصلاحيات التي يطلبها التطبيق</h3>
+      <ul>
+        <li><b>الموقع الجغرافي:</b> لحساب مواقيت الصلاة بدقة وعرض المساجد القريبة منك على الخريطة. يُستخدم الموقع لتقديم هذه الخدمة فقط.</li>
+        <li><b>الإنترنت:</b> للاستماع إلى القرآن والإذاعة ومشاهدة القنوات الإسلامية، وعرض الخريطة، والتحقق من وجود تحديثات جديدة.</li>
+        <li><b>الإشعارات:</b> لتنبيهك بمواقيت الصلاة وتشغيل الأذان والأذكار في أوقاتها.</li>
+      </ul>
+
+      <h3>3. الخدمات الخارجية</h3>
+      <p>
+        قد يعتمد التطبيق على خدمات خارجية مثل الخرائط ومصادر البث الصوتي
+        والمرئي، ولهذه الجهات سياسات خصوصية خاصة بها، ولا نتحكم فيما تجمعه.
+        كما يتم التحقق من التحديثات عبر صفحة الإصدارات على GitHub.
+        وفي هذه الصفحة، يُستخدم موقعك داخل المتصفح فقط لعرض مواقيت الصلاة، حيث تُرسل
+        إحداثيات موقعك إلى خدمتي Aladhan وBigDataCloud لحساب المواقيت ومعرفة اسم المحافظة،
+        ولا نحتفظ بها لأنه لا توجد لدينا خوادم لتخزينها.
+      </p>
+
+      <h3>4. التخزين على جهازك</h3>
+      <p>
+        تُحفظ إعداداتك وتفضيلاتك (مثل نوع الخط وصوت الأذان) على جهازك فقط،
+        ويمكنك حذفها في أي وقت بحذف التطبيق أو مسح بياناته من إعدادات الجهاز.
+      </p>
+
+      <h3>5. خصوصية الأطفال</h3>
+      <p>
+        التطبيق مناسب لجميع الأعمار، ولا نجمع عن قصد أي بيانات شخصية من الأطفال.
+      </p>
+
+      <h3>6. التغييرات على هذه السياسة</h3>
+      <p>
+        قد نحدّث هذه السياسة من وقت لآخر، وسيتم نشر أي تغيير على هذه الصفحة
+        مع تحديث تاريخ آخر تعديل.
+      </p>
+
+      <h3>7. تواصل معنا</h3>
+      <p>
+        لأي استفسار حول الخصوصية، تواصل معنا عبر
+        <a href="https://t.me/Rafiq_Almusilm" rel="noopener">قناة تيليجرام</a>.
+      </p>
+    </section>
+
     <a class="telegram rv" style="--i:7"
        href="https://t.me/Rafiq_Almusilm"
        aria-label="زيارة قناة رفيق المسلم على تيليجرام">
@@ -423,7 +618,14 @@ h1{
     </a>
   </main>
 
-  <div class="footer rv" style="--i:8">© 2026 رفيق المسلم</div>
+  <div class="footer rv" style="--i:8">
+    <div class="links"><a href="#privacy">سياسة الخصوصية</a></div>
+    © 2026 رفيق المسلم
+  </div>
+</div>
+
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="عرض لقطة الشاشة">
+  <img id="lbImg" alt="">
 </div>
 
 <script>
@@ -468,12 +670,177 @@ h1{
     }
   });
 
-  /* throttle للـ resize عشان ما يتنفذش مئات المرات */
   window.addEventListener('resize',function(){
     if(!env.classList.contains('open')) return;
     cancelAnimationFrame(rafId);
     rafId=requestAnimationFrame(fit);
   },{passive:true});
+
+  /* عرض لقطات الشاشة بحجم كبير */
+  var lb=document.getElementById('lb'),
+      lbImg=document.getElementById('lbImg');
+
+  document.getElementById('shots').addEventListener('click',function(e){
+    var b=e.target.closest('.shot');
+    if(!b) return;
+    var img=b.querySelector('img');
+    lbImg.src=img.src;
+    lbImg.alt=img.alt;
+    lb.classList.add('show');
+  });
+  function closeLb(){lb.classList.remove('show');lbImg.removeAttribute('src')}
+  lb.addEventListener('click',closeLb);
+  document.addEventListener('keydown',function(e){
+    if(e.key==='Escape') closeLb();
+  });
+})();
+</script>
+
+<script>
+/* مواقيت الصلاة: تحديد الموقع ← اسم المحافظة ← المواقيت من Aladhan (الهيئة المصرية العامة للمساحة داخل مصر) */
+(function(){
+  var $=function(id){return document.getElementById(id)};
+  var card=$('prayer'),cityEl=$('pCity'),dateEl=$('pDate'),nameEl=$('pNextName'),
+      countEl=$('pCount'),grid=$('pGrid'),note=$('pNote'),sel=$('pSel');
+
+  var GOV=[["القاهرة",30.0444,31.2357],["الجيزة",30.0131,31.2089],["الإسكندرية",31.2001,29.9187],
+    ["القليوبية",30.4659,31.1848],["الشرقية",30.5877,31.5020],["الدقهلية",31.0364,31.3807],
+    ["الغربية",30.7865,31.0004],["المنوفية",30.5972,30.9876],["البحيرة",31.0409,30.4717],
+    ["كفر الشيخ",31.1107,30.9388],["دمياط",31.4165,31.8133],["بورسعيد",31.2653,32.3019],
+    ["الإسماعيلية",30.5965,32.2715],["السويس",29.9668,32.5498],["شمال سيناء",31.1316,33.7983],
+    ["جنوب سيناء",28.2417,33.6222],["الفيوم",29.3084,30.8428],["بني سويف",29.0661,31.0994],
+    ["المنيا",28.1099,30.7503],["أسيوط",27.1809,31.1837],["سوهاج",26.5591,31.6948],
+    ["قنا",26.1551,32.7160],["الأقصر",25.6872,32.6396],["أسوان",24.0889,32.8998],
+    ["البحر الأحمر",27.2579,33.8116],["الوادي الجديد",25.4519,30.5464],["مطروح",31.3543,27.2373]];
+
+  var ORDER=['Fajr','Sunrise','Dhuhr','Asr','Maghrib','Isha'],
+      PRAY=['Fajr','Dhuhr','Asr','Maghrib','Isha'],
+      NAMES={Fajr:'الفجر',Sunrise:'الشروق',Dhuhr:'الظهر',Asr:'العصر',Maghrib:'المغرب',Isha:'العشاء'};
+
+  var T=null,loadedDay='',cur=null,items={};
+
+  function ar(s){return String(s).replace(/\d/g,function(d){return '٠١٢٣٤٥٦٧٨٩'[d]})}
+  function pad(n){return n<10?'0'+n:''+n}
+  function dayKey(d){return pad(d.getDate())+'-'+pad(d.getMonth()+1)+'-'+d.getFullYear()}
+  function store(k,v){try{if(v===undefined)return JSON.parse(localStorage.getItem(k));localStorage.setItem(k,JSON.stringify(v))}catch(e){return null}}
+  function inEgypt(lat,lon){return lat>21.5&&lat<32&&lon>24.5&&lon<36.9}
+  function toDate(s){var p=s.match(/(\d{1,2}):(\d{2})/),d=new Date();d.setHours(+p[1],+p[2],0,0);return d}
+  function fmt(s){
+    var p=s.match(/(\d{1,2}):(\d{2})/),h=+p[1],m=+p[2];
+    return {t:ar(pad(h%12||12)+':'+pad(m)),s:h>=12?'م':'ص'};
+  }
+  function fx(url){
+    var c=new AbortController(),id=setTimeout(function(){c.abort()},9000);
+    return fetch(url,{signal:c.signal}).then(function(r){clearTimeout(id);if(!r.ok)throw 0;return r.json()});
+  }
+  function nearest(lat,lon){
+    var best=GOV[0],bd=1e9;
+    GOV.forEach(function(g){
+      var dx=(g[2]-lon)*Math.cos(lat*Math.PI/180),dy=g[1]-lat,d=dx*dx+dy*dy;
+      if(d<bd){bd=d;best=g}
+    });
+    return best[0];
+  }
+  function reverse(lat,lon){
+    return fx('https://api.bigdatacloud.net/data/reverse-geocode-client?latitude='+lat+'&longitude='+lon+'&localityLanguage=ar')
+      .then(function(j){
+        var n=(j.principalSubdivision||'').replace(/^محافظة\s+/,'').replace(/\s*Governorate$/i,'')||j.city||j.locality||'';
+        if(n&&j.countryCode&&j.countryCode!=='EG'&&j.countryName) n+='، '+j.countryName;
+        return n;
+      }).catch(function(){return ''});
+  }
+  function getTimes(lat,lon){
+    var now=new Date(),dk=dayKey(now),key='pt:'+dk+':'+lat.toFixed(2)+','+lon.toFixed(2),c=store(key);
+    if(c&&c.t) return Promise.resolve(c);
+    var url='https://api.aladhan.com/v1/timings/'+dk+'?latitude='+lat+'&longitude='+lon+(inEgypt(lat,lon)?'&method=5':'');
+    return fx(url).then(function(j){
+      var d=j.data,h=d.date.hijri,
+          hs=ar(h.day)+' '+h.month.ar.replace(/[\u064B-\u0652]/g,'')+' '+ar(h.year)+' هـ',
+          out={t:d.timings,h:hs};
+      store(key,out);return out;
+    });
+  }
+
+  /* بناء الشبكة */
+  ORDER.forEach(function(k){
+    var el=document.createElement('div');
+    el.className='p-item';
+    el.innerHTML='<span>'+NAMES[k]+'</span><div><b>--:--</b><em></em></div>';
+    grid.appendChild(el);items[k]=el;
+  });
+  sel.innerHTML='<option value="">اختر محافظتك يدويًا</option>'+
+    GOV.map(function(g,i){return '<option value="'+i+'">'+g[0]+'</option>'}).join('');
+
+  function render(){
+    if(!T) return;
+    var now=new Date(),next=null,nd=null;
+    if(dayKey(now)!==loadedDay&&cur){run(cur.lat,cur.lon,cur.name,cur.mode,true);return}
+    for(var i=0;i<PRAY.length;i++){
+      var d=toDate(T.t[PRAY[i]]);
+      if(d>now){next=PRAY[i];nd=d;break}
+    }
+    if(!next){next='Fajr';nd=toDate(T.t.Fajr);nd.setDate(nd.getDate()+1)}
+    ORDER.forEach(function(k){
+      var el=items[k],f=fmt(T.t[k]);
+      el.querySelector('b').textContent=f.t;
+      el.querySelector('em').textContent=f.s;
+      el.className='p-item'+(k===next?' active':(toDate(T.t[k])<=now?' passed':''));
+    });
+    nameEl.textContent=NAMES[next];
+    var diff=Math.max(0,Math.floor((nd-now)/1000));
+    countEl.textContent=ar(pad(Math.floor(diff/3600))+':'+pad(Math.floor(diff%3600/60))+':'+pad(diff%60));
+  }
+
+  function setNote(t){note.textContent=t||''}
+
+  function run(lat,lon,name,mode,silent){
+    cur={lat:lat,lon:lon,name:name,mode:mode};
+    if(!silent){card.classList.add('loading')}
+    var rn=name?Promise.resolve(name):reverse(lat,lon).then(function(n){
+      return n||(inEgypt(lat,lon)?nearest(lat,lon):'موقعك الحالي');
+    });
+    return Promise.all([rn,getTimes(lat,lon)]).then(function(r){
+      cur.name=r[0];T=r[1];loadedDay=dayKey(new Date());
+      cityEl.textContent=r[0];
+      dateEl.textContent=new Date().toLocaleDateString('ar-EG',{weekday:'long',day:'numeric',month:'long'})+' · '+T.h;
+      var idx=-1;GOV.forEach(function(g,i){if(g[0]===r[0])idx=i});
+      sel.value=mode==='manual'&&idx>-1?String(idx):'';
+      card.classList.remove('loading');
+      render();
+    }).catch(function(){
+      cityEl.textContent=name||'تعذر تحميل المواقيت';
+      setNote('تعذر تحميل المواقيت، تأكد من اتصالك بالإنترنت ثم اضغط «حدد موقعك».');
+      card.classList.remove('loading');
+    });
+  }
+
+  function locate(){
+    setNote('');cityEl.textContent='جارٍ تحديد موقعك…';card.classList.add('loading');
+    store('pt:pref',null);try{localStorage.removeItem('pt:pref')}catch(e){}
+    function fallback(msg){
+      var g=GOV[0];run(g[1],g[2],g[0],'fallback').then(function(){setNote(msg)});
+    }
+    if(!navigator.geolocation){fallback('متصفحك لا يدعم تحديد الموقع، تم عرض مواقيت القاهرة. يمكنك اختيار محافظتك من القائمة.');return}
+    navigator.geolocation.getCurrentPosition(function(p){
+      run(p.coords.latitude,p.coords.longitude,null,'auto');
+    },function(e){
+      fallback(e&&e.code===1
+        ?'لم يتم السماح بالوصول إلى الموقع، تم عرض مواقيت القاهرة. اسمح بالموقع أو اختر محافظتك من القائمة.'
+        :'تعذر تحديد موقعك، تم عرض مواقيت القاهرة. يمكنك اختيار محافظتك من القائمة.');
+    },{enableHighAccuracy:false,timeout:10000,maximumAge:600000});
+  }
+
+  $('pLoc').addEventListener('click',locate);
+  sel.addEventListener('change',function(){
+    if(sel.value==='') return;
+    var g=GOV[+sel.value];setNote('');
+    store('pt:pref',{lat:g[1],lon:g[2],name:g[0]});
+    run(g[1],g[2],g[0],'manual');
+  });
+
+  setInterval(render,1000);
+  var pref=store('pt:pref');
+  if(pref&&pref.lat) run(pref.lat,pref.lon,pref.name,'manual'); else locate();
 })();
 </script>
 </body>
